@@ -24,6 +24,8 @@ dependencies {
 	implementation 'org.apache.kafka:kafka-streams'
 	implementation 'com.google.guava:guava:29.0-jre'
 	implementation 'org.apache.commons:commons-lang3:3.11'
+	implementation 'com.espertech:esper-compiler:8.5.0'
+	implementation 'com.espertech:esper-runtime:8.5.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

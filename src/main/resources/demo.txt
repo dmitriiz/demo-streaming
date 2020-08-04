@@ -1,2 +1,4 @@
 @name('demo')
-select * from DataMessage
+select * from DataMessage(value > 50)#time(10)
+group by source
+having count(*) > 2

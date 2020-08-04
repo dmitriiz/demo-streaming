@@ -16,6 +16,7 @@ public class DataProducerImpl implements DataProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    @Override
     public void send(DataMessage msg) {
         kafkaTemplate.send(AppConstants.TOPIC_IN, msg.getSource(), msg).addCallback(
                 result -> {
@@ -29,7 +30,7 @@ public class DataProducerImpl implements DataProducer {
 
     @Scheduled(fixedRate = 1000)
     public void sendRandomMessage() {
-        DataMessage msg = new DataMessage();
+        var msg = new DataMessage();
         msg.setSource(AppConstants.randomSource());
         msg.setValue(AppConstants.randomValue());
         send(msg);

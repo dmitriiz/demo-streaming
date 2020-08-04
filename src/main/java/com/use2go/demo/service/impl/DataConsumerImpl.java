@@ -12,6 +12,7 @@ import java.io.IOException;
 public class DataConsumerImpl implements DataConsumer {
 
     @KafkaListener(topics = AppConstants.TOPIC_OUT)
+    @Override
     public void consume(DataMessage msg) throws IOException {
         log.info("Message received: {}", msg);
     }

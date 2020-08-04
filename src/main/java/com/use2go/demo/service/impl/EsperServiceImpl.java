@@ -4,7 +4,6 @@ import com.espertech.esper.common.client.EPCompiled;
 import com.espertech.esper.common.client.configuration.Configuration;
 import com.espertech.esper.compiler.client.CompilerArguments;
 import com.espertech.esper.compiler.client.EPCompileException;
-import com.espertech.esper.compiler.client.EPCompiler;
 import com.espertech.esper.compiler.client.EPCompilerProvider;
 import com.espertech.esper.runtime.client.*;
 import com.use2go.demo.service.EsperService;
@@ -28,10 +27,10 @@ public class EsperServiceImpl implements EsperService {
             throw new UncheckedIOException(e);
         }
 
-        Configuration configuration = new Configuration();
+        var configuration = new Configuration();
         configuration.getCommon().addEventType(eventClass.getSimpleName(), eventClass);
-        CompilerArguments args = new CompilerArguments(configuration);
-        EPCompiler compiler = EPCompilerProvider.getCompiler();
+        var args = new CompilerArguments(configuration);
+        var compiler = EPCompilerProvider.getCompiler();
         EPCompiled compiled;
         try {
             compiled = compiler.compile(epl, args);
@@ -39,7 +38,7 @@ public class EsperServiceImpl implements EsperService {
             throw new RuntimeException(e);
         }
 
-        EPRuntime runtime = EPRuntimeProvider.getDefaultRuntime(configuration);
+        var runtime = EPRuntimeProvider.getDefaultRuntime(configuration);
         EPDeployment deployment;
         try {
             deployment = runtime.getDeploymentService().deploy(compiled);
@@ -48,7 +47,7 @@ public class EsperServiceImpl implements EsperService {
             throw new RuntimeException(ex);
         }
 
-        EPStatement statement = runtime.getDeploymentService().getStatement(deployment.getDeploymentId(), "demo");
+        var statement = runtime.getDeploymentService().getStatement(deployment.getDeploymentId(), "demo");
         statement.addListener(updateListener);
 
         return runtime;
